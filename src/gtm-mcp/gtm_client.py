@@ -16,6 +16,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/tagmanager.readonly"
 ]
 
+
 class GTMClient:
     def __init__(self):
         self.service = _authenticate(TOKEN_FILE,SERVICE_NAME,VERSION,SCOPES)
