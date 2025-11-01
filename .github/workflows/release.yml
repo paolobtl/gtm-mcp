@@ -61,8 +61,8 @@ jobs:
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add release/
-          git commit -m "Release ${{ needs.details.outputs.tag_name }} build"
-          git push origin HEAD:main  # oppure un altro branch, se necessario
+          git commit -m "Release ${{ needs.details.outputs.new_version }} build"
+          git push origin HEAD:main  # Puoi sostituire con il tuo ramo di destinazione
 
   pypi_publish:
     needs: [setup_and_build, details]
