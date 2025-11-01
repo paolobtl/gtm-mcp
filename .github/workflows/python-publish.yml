@@ -45,6 +45,9 @@ jobs:
           python-version: "3.12"
           cache: "poetry"
 
+      - name: Install Poetry
+      - uses: snok/install-poetry@v1
+      
       - name: Get Name of Package
         id: package_information
         run: |
