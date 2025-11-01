@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "gtm-mcp"
+version = "0.0.1"
+description = "MCP server for Google Tag Manager"
+authors = ["Paolo Bietolini"]
+license = " MIT"
+readme = "README.md"
+
+[tool.poetry.dependecies]
+python = "^3.12"
+google_api_python_client = "^2.186.0"
+google_auth_oauthlib = "^1.2.3"
+mcp= "^1.20.0"
+protobuf= "^6.33.0"
+python-dotenv ="^1.2.1"
+
+[build.system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
