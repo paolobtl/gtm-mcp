@@ -79,12 +79,12 @@ jobs:
     needs: details
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5.0.0
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6.0.0
         with:
-          python-version: "3.12"
+          python-version: "3.13"
           cache: "poetry"
 
       - name: Set project version with Poetry
@@ -101,7 +101,7 @@ jobs:
           git push origin version-bump-${{ needs.details.outputs.new_version }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7.0.8
         with:
           branch: version-bump-${{ needs.details.outputs.new_version }}
           title: "Bump version to ${{ needs.details.outputs.new_version }}"
@@ -116,7 +116,7 @@ jobs:
           poetry build
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v4.0.0
         with:
           name: dist
           path: dist/
@@ -134,13 +134,13 @@ jobs:
 
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6.0.0
         with:
           name: dist
           path: dist/
 
       - name: Publish distribution to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        uses: pypa/gh-action-pypi-publish@v1.13.0
 
       # Alternatively, use this one
       # - name: Mint token
@@ -163,7 +163,7 @@ jobs:
       contents: write
     steps:
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6.0.0
         with:
           name: dist
           path: ./dist/
