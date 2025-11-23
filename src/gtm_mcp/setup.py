@@ -18,13 +18,23 @@ def get_config_path():
     system = platform.system()
 
     if system == "Darwin":  # macOS
-        return Path.home() / "Library/Application Support/Claude/claude_desktop_config.json"
+        return Path.home() / "Library" / "Application Support" / "Claude" / "claude_desktop_config.json"
     elif system == "Linux":
-        return Path.home() / ".config/Claude/claude_desktop_config.json"
+        # Follow XDG Base Directory specification
+        xdg_config = os.getenv("XDG_CONFIG_HOME")
+        if xdg_config:
+            return Path(xdg_config) / "Claude" / "claude_desktop_config.json"
+        return Path.home() / ".config" / "Claude" / "claude_desktop_config.json"
     elif system == "Windows":
-        return Path(os.getenv("APPDATA")) / "Claude/claude_desktop_config.json"
+        # Use APPDATA for Windows, which is the standard location for app configs
+        appdata = os.getenv("APPDATA")
+        if not appdata:
+            print("❌ APPDATA environment variable not found")
+            sys.exit(1)
+        return Path(appdata) / "Claude" / "claude_desktop_config.json"
     else:
         print(f"❌ Unsupported operating system: {system}")
+        print(f"   Detected: {platform.platform()}")
         sys.exit(1)
 
 
