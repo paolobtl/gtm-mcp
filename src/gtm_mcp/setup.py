@@ -18,23 +18,58 @@ def get_config_path():
     system = platform.system()
 
     if system == "Darwin":  # macOS
+        # Verify it's actually macOS with mac_ver()
+        mac_ver = platform.mac_ver()[0]
+        if mac_ver:
+            print(f"   Detected macOS version: {mac_ver}")
         return Path.home() / "Library" / "Application Support" / "Claude" / "claude_desktop_config.json"
+
     elif system == "Linux":
+        # Check if we can get more specific Linux distribution info
+        try:
+            os_release = platform.freedesktop_os_release()
+            distro_name = os_release.get('NAME', 'Unknown Linux')
+            print(f"   Detected: {distro_name}")
+        except (OSError, AttributeError):
+            # freedesktop_os_release not available or file not found
+            print(f"   Detected: Linux")
+
         # Follow XDG Base Directory specification
         xdg_config = os.getenv("XDG_CONFIG_HOME")
         if xdg_config:
             return Path(xdg_config) / "Claude" / "claude_desktop_config.json"
         return Path.home() / ".config" / "Claude" / "claude_desktop_config.json"
+
     elif system == "Windows":
+        # Get Windows version info for better error messages
+        try:
+            win_ver = platform.win32_ver()
+            if win_ver[0]:  # release
+                print(f"   Detected Windows {win_ver[0]}")
+                # Check for Windows 10/11 specific editions
+                try:
+                    edition = platform.win32_edition()
+                    if edition:
+                        print(f"   Edition: {edition}")
+                except AttributeError:
+                    pass  # win32_edition() not available in older Python versions
+        except AttributeError:
+            print(f"   Detected: Windows")
+
         # Use APPDATA for Windows, which is the standard location for app configs
         appdata = os.getenv("APPDATA")
         if not appdata:
             print("❌ APPDATA environment variable not found")
+            print("   This is unusual for Windows. Please check your system configuration.")
             sys.exit(1)
         return Path(appdata) / "Claude" / "claude_desktop_config.json"
+
     else:
         print(f"❌ Unsupported operating system: {system}")
         print(f"   Detected: {platform.platform()}")
+        print(f"   Machine: {platform.machine()}")
+        print(f"   Architecture: {platform.architecture()}")
+        print("\n   Please report this issue at: https://github.com/paolobtl/gtm-mcp/issues")
         sys.exit(1)
 
 
