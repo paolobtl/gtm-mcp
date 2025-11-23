@@ -46,6 +46,21 @@ A Model Context Protocol (MCP) server that enables Claude to interact with Googl
 - Claude Desktop (or any MCP-compatible client like Cursor)
 - A Google account with access to Google Tag Manager
 
+### Installation
+
+```bash
+pip install gtm-mcp
+gtm-mcp-setup
+```
+
+The setup wizard will guide you through:
+1. Creating Google Cloud OAuth credentials (5 minutes)
+2. Configuring Claude Desktop automatically
+
+See [PyPi](https://pypi.org/project/gtm-mcp/)
+
+> **Prefer manual setup?** See the [Complete Setup Guide](#-complete-setup-guide) below.
+
 ---
 
 ## 📋 Complete Setup Guide
@@ -55,8 +70,6 @@ A Model Context Protocol (MCP) server that enables Claude to interact with Googl
 ```bash
 pip install gtm-mcp
 ```
-
-See [PyPi](https://pypi.org/project/gtm-mcp/)
 
 
 ---
