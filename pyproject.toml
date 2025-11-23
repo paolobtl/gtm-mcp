@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "gtm-mcp"
-version = "0.1.2"
+version = "0.1.3"
 description = "MCP server for Google Tag Manager"
 authors = ["Paolo Bietolini"]
 license = "MIT"
 readme = "README.md"
-packages = [{ include = "gtm-mcp", from = "src" }]
+packages = [{ include = "gtm_mcp", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
