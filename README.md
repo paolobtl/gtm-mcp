@@ -27,6 +27,7 @@ A Model Context Protocol (MCP) server that enables Claude to interact with Googl
 - [License](#-license)
 - [Contributing](#-contributing)
 - [Getting Help](#-getting-help)
+- [Known Bugs](#known-bugs)
 
 
 ## Features
@@ -345,5 +346,7 @@ If you encounter issues:
    - Python version (`python --version`)
    - Error messages from Claude Desktop logs
    - Steps to reproduce the issue
-
+## Known Bugs
+[⬆ top](#gtm-mcp-server)
+- https://github.com/anthropics/claude-code/issues/11688
 ---
